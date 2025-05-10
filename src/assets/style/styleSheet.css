@@ -1,0 +1,40 @@
+@font-face {
+    font-family: "Garamond";
+    src: url("../font/EBGaramond-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Garamond";
+    src: url("../font/EBGaramond-Medium.ttf");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Garamond";
+    src: url("../font/EBGaramond-SemiBold.ttf");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Garamond";
+    src: url("../font/EBGaramond-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Garamond";
+    src: url("../font/EBGaramond-ExtraBold.ttf");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  
