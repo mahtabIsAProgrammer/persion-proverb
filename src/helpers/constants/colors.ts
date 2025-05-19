@@ -1,10 +1,8 @@
-export const COLOR_PRIMARY = "#6C63FF"; //	Soft purple — playful & modern
-export const COLOR_SECEONDRY = "#FF6B6B"; //	Warm coral — adds contrast
-export const COLOR_ACCENT = "#FFD166"; //	Pastel yellow — subtle highlight
-export const COLOR_TEXT = "#2E2E2E"; // 	Neutral dark gray — easy to read
-export const COLOR_TITLE = "#1A1A1A"; //	Deep black for impact
-export const COLOR_MUTED_TEXT = "#7D7D7D"; //		Light gray for captions, hints
-export const COLOR_PLACEHOLDER = "#C4C4C4"; //  Soft gray — for inputs/placeholders
+export const COLOR_PRIMARY = "#B96400";
+export const COLOR_SECEONDRY = "#5D5D5D";
+export const COLOR_TEXT = "#FDFDFD";
+export const COLOR_MUTED_TEXT = "#7D7D7D";
+export const COLOR_PLACEHOLDER = "#C4C4C4";
 export const COLOR_BACKGROUND = "#FDFDFD";
-export const COLOR_SURFACE = "#FFFFFF"; // 	White cards/containers
+export const COLOR_SURFACE = "#B38532";
 export const COLOR_BORDER = "#EAEAEA";

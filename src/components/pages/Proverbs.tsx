@@ -1,26 +1,24 @@
 import type { FC } from "react";
 import { Grid } from "@mui/material";
-import { Link } from "react-router-dom";
-import { isEmpty, map, slice } from "lodash";
+import { isEmpty, map } from "lodash";
 
 import { Navbar } from "../common/Navbar";
-import { ProverbCard } from "../common/ProverbCard.tsx";
-import { useProverbSearch } from "../../services/hooks.ts";
-import { homeSX } from "../../helpers/styleObjects/pages.ts";
-import { arrowFilledIcon } from "../others/SvgComponents.tsx";
+import { ProverbCard } from "../common/ProverbCard";
+import { useProverbSearch } from "../../services/hooks";
+import { proverbsSX } from "../../helpers/styleObjects/pages";
 
-export const Home: FC = () => {
+export const Proverbs: FC = () => {
   const { data, isLoading } = useProverbSearch();
-  const slicedData = slice(data, 0, 4);
+
   return (
-    <Grid sx={homeSX}>
+    <Grid sx={proverbsSX}>
       <Navbar />
       <Grid className="content">
         <Grid className="cards-container">
           <Grid className="cards-wrapper">
             {!isEmpty(data)
               ? map(
-                  slicedData,
+                  data,
                   ({
                     categories,
                     englishText,
@@ -41,9 +39,6 @@ export const Home: FC = () => {
                 )
               : ""}
           </Grid>
-          <Link className="view-all" to="/proverbs">
-            See All {arrowFilledIcon()}
-          </Link>
         </Grid>
       </Grid>
     </Grid>

@@ -1,28 +1,34 @@
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { type SxProps, type Theme, Grid } from "@mui/material";
 
-import { CustomSwitch } from "../controllers/CustomSwtich";
 import { MAX_WIDTH } from "../../helpers/constants/static";
-import { COLOR_PRIMARY } from "../../helpers/constants/colors";
+import { CustomButton } from "../controllers/CustomButton";
 import { SPACE_MD, SPACE_SM } from "../../helpers/constants/spaces";
-import { FONT_BODY, FONT_WEIGHT_BLOD } from "../../helpers/constants/fonts";
+import { FONT_BODY, FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
 
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.webp";
+import { COLOR_PRIMARY } from "../../helpers/constants/colors";
 
 export const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <Grid sx={navbarSX}>
       <img src={logo} className="logo" />
       <Grid className="list">
-        <Link className="link" to={"/"}>
+        <NavLink className="link" to={"/"}>
           Home
-        </Link>
-        <Link className="link" to={"/proverbs"}>
+        </NavLink>
+        <NavLink className="link" to={"/proverbs"}>
           All Proverbs
-        </Link>
+        </NavLink>
       </Grid>
-      <Grid>
-        <CustomSwitch />
+      <Grid className="buttons">
+        <CustomButton
+          variant="outlined"
+          text="Random Proverb"
+          onClick={() => navigate("/proverbs/random")}
+        />
+        <CustomButton variant="contained" text="Add Proverb" />
       </Grid>
     </Grid>
   );
@@ -36,22 +42,45 @@ const navbarSX: SxProps<Theme> = {
   display: "flex",
   width: MAX_WIDTH,
   position: "sticky",
-  borderRadius: "8px",
+  borderRadius: "22px",
   alignItems: "center",
   justifyContent: "space-between",
-  backgroundColor: COLOR_PRIMARY,
+  backdropFilter: "brightness(0.3)",
+
+  zIndex: "222",
   "& .logo": {
     width: "150px",
   },
   "& .list": {
     display: "flex",
-    gap: "18px",
-    marginRight: SPACE_MD,
+    gap: "26px",
+    ml: "20px",
     "& .link": {
+      position: "relative",
       color: "#FFFFFF",
       textDecoration: "none",
       fontSize: FONT_BODY,
-      fontWeight: FONT_WEIGHT_BLOD,
+      fontWeight: FONT_WEIGHT_REGULAR,
+      "&::after": {
+        content: '""',
+        position: "absolute",
+        left: 0,
+        bottom: -2,
+        width: 0,
+        height: "2px",
+        backgroundColor: COLOR_PRIMARY,
+        transition: "width 0.3s ease",
+      },
+      "&:hover::after": {
+        width: "100%",
+      },
+      "&.active::after": {
+        width: "100%",
+      },
     },
+  },
+  "& .buttons": {
+    display: "flex",
+    gap: "6px",
   },
 };

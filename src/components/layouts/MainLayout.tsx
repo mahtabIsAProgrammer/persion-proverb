@@ -16,9 +16,11 @@ import { FONT_FAMILY } from "../../helpers/constants/static";
 import { mainLayoutSX } from "../../helpers/styleObjects/main";
 import { FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const MainLayout: FC = () => {
   const children = useRoutes(routes);
+  const queryClient = new QueryClient();
 
   const { pathname } = useLocation();
 
@@ -56,17 +58,19 @@ const MainLayout: FC = () => {
   }, [pathname]);
 
   return (
-    <ThemeProvider theme={themeMUI}>
-      <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Grid sx={mainLayoutSX} className="main-layout">
-            {children}
-          </Grid>
-        )}
-      </MaterialCssVarsProvider>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={themeMUI}>
+        <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <Grid sx={mainLayoutSX} className="main-layout">
+              {children}
+            </Grid>
+          )}
+        </MaterialCssVarsProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 
