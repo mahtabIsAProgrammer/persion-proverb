@@ -1,7 +1,7 @@
 //fontSizes
 export const FONT_HEADING_LARGE = "40px"; // Main title, bold presence
-export const FONT_HEADING_MEDIUM = "32px"; // Section titles
-export const FONT_HEADING_SMALL = "24px"; //	Sub-section headers
+export const FONT_HEADING_MEDIUM = "30px"; // Section titles
+export const FONT_HEADING_SMALL = "20px"; //	Sub-section headers
 export const FONT_BODY = "18px"; // 	Comfortable for reading
 export const FONT_SMALL_TEXT = "14px"; //   Secondary info, hints
 export const FONT_CAPTION = "12px"; // 	Labels, timestamps, etc.

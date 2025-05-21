@@ -23,4 +23,21 @@ interface IProverbCard {
   isRandomPage?: boolean;
   categories: string | string[];
   refetch?: TAny;
+  onEdit?: TEmptyFunctionVoid;
+  onDelete?: TEmptyFunctionVoid;
+}
+interface IProverbForm {
+  open: boolean;
+  onClose: TEmptyFunctionVoid;
+  title: string;
+  initialValues: {
+    persionText: string;
+    englishText: string;
+    germanText: string;
+    meaning: string;
+    categories: string[];
+  };
+  validationFunctions: () => object;
+  onSubmit: (values: Proverbs) => void;
+  categoriesData: string[];
 }

@@ -7,7 +7,6 @@ import {
   getProverbs,
   getProverbsById,
   updateProverb,
-  type Proverbs,
 } from "./api";
 
 export const useProverbSearch = (filters?: {

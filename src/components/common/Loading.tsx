@@ -1,7 +1,13 @@
-import { Grid, type SxProps, type Theme } from "@mui/material";
+import { Grid, Box, type SxProps, type Theme } from "@mui/material";
+
+import loading from "../../assets/images/loading.gif";
 
 export const Loading = () => {
-  return <Grid sx={laodingSX}>Loading... </Grid>;
+  return (
+    <Grid sx={laodingSX}>
+      <Box component="img" className="img-loading" src={loading}></Box>{" "}
+    </Grid>
+  );
 };
 
 const laodingSX: SxProps<Theme> = {
@@ -10,4 +16,8 @@ const laodingSX: SxProps<Theme> = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  backgroundColor: "#000",
+  "& .img-loading": {
+    width: "160px",
+  },
 };

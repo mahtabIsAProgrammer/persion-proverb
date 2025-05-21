@@ -1,13 +1,5 @@
 import apiClient from "./apiClient";
 
-export interface Proverbs {
-  persionText: string;
-  englishText: string;
-  germanText: string;
-  meaning: string;
-  categories: string[];
-}
-
 // GET all proverbs
 export const getProverbs = (params?: { search?: string; category?: string }) =>
   apiClient.get("/proverbs", { params }).then((res) => res.data);

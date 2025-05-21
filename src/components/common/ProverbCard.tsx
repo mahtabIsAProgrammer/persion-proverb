@@ -14,7 +14,11 @@ import { SPACE_SM } from "../../helpers/constants/spaces";
 import { CustomButton } from "../controllers/CustomButton";
 import { CustomTooltip } from "../controllers/CustomTooltip";
 import { slicedTextHandler } from "../../helpers/utils/others";
-import { FONT_WEIGHT_BLOD } from "../../helpers/constants/fonts";
+import {
+  FONT_HEADING_MEDIUM,
+  FONT_HEADING_SMALL,
+  FONT_WEIGHT_BLOD,
+} from "../../helpers/constants/fonts";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
 
 import vector from "../../assets/images/Vector.webp";
@@ -32,6 +36,8 @@ export const ProverbCard = memo<IProverbCard>(
     isLoading,
     isRandomPage,
     refetch,
+    onEdit,
+    onDelete,
   }) => {
     const navigate = useNavigate();
 
@@ -129,14 +135,8 @@ export const ProverbCard = memo<IProverbCard>(
             />
           ) : (
             <>
-              <CustomButton
-                text="Edit"
-                onClick={() => navigate(`/proverbs/${id}`)}
-              />
-              <CustomButton
-                text="Delete"
-                onClick={() => navigate(`/proverbs/${id}`)}
-              />
+              <CustomButton text="Edit" onClick={onEdit} />
+              <CustomButton text="Delete" onClick={onDelete} />
             </>
           )}
         </Grid>
@@ -176,7 +176,7 @@ const proverbCardSX = (
     mb: SPACE_SM,
     "& .title": {
       color: COLOR_PRIMARY,
-      fontSize: "20px",
+      fontSize: FONT_HEADING_SMALL,
       display: "flex",
       gap: "2px",
       fontWeight: FONT_WEIGHT_BLOD,
@@ -192,7 +192,7 @@ const proverbCardSX = (
       width: "100%",
       "&.persion": {
         fontFamily: "YekanBakh !important",
-        fontSize: "30px",
+        fontSize: FONT_HEADING_MEDIUM,
         lineHeight: "22px",
       },
     },
@@ -212,10 +212,10 @@ const proverbCardSX = (
     gap: "12px",
     display: "flex",
     justifyContent: "center",
-    ...(isDetailPage && isRandomPage
+    ...(isDetailPage || isRandomPage
       ? {
           "& button": {
-            width: isDetailPage ? "100px" : "",
+            width: "170px !important",
           },
         }
       : {}),

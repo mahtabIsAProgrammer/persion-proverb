@@ -17,7 +17,7 @@ export const Home: FC = () => {
       <Navbar />
       <Grid className="content">
         <Grid className="cards-container">
-          <Grid className="cards-wrapper">
+          <Grid className="cards-wrapper" container size={{ xs: 12 }}>
             {!isEmpty(data)
               ? map(
                   slicedData,
@@ -28,6 +28,11 @@ export const Home: FC = () => {
                     id,
                     persionText,
                   }) => (
+                    // <Grid
+                    //   // sx={{ width: { xs: "100%", md: undefined } }}
+                    //   size={{ xs: 12 }}
+                    //   key={id}
+                    // >
                     <ProverbCard
                       isLoading={isLoading}
                       categories={categories}
@@ -35,8 +40,8 @@ export const Home: FC = () => {
                       germanText={germanText}
                       id={id}
                       persionText={persionText}
-                      key={id}
                     />
+                    // </Grid>
                   )
                 )
               : ""}

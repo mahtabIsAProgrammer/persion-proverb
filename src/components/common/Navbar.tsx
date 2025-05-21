@@ -1,5 +1,15 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { type SxProps, type Theme, Grid } from "@mui/material";
+import {
+  type SxProps,
+  type Theme,
+  Drawer,
+  Grid,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  useTheme,
+} from "@mui/material";
 
 import { MAX_WIDTH } from "../../helpers/constants/static";
 import { CustomButton } from "../controllers/CustomButton";
@@ -7,29 +17,124 @@ import { SPACE_MD, SPACE_SM } from "../../helpers/constants/spaces";
 import { FONT_BODY, FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
 
 import logo from "../../assets/images/logo.webp";
-import { COLOR_PRIMARY } from "../../helpers/constants/colors";
+import { COLOR_PRIMARY, COLOR_SECEONDRY } from "../../helpers/constants/colors";
+import { ProverbForm } from "./ProverbForm";
+import { useState } from "react";
+import { validationProverb } from "../../helpers/utils/validationHandler";
+import { useCreateProverb } from "../../services/hooks";
+import { useMediaQuery } from "@mui/system";
+import { closeIcon, menuIcon } from "../others/SvgComponents";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [open, setOpen] = useState<boolean | undefined>();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const { mutate: createProverb } = useCreateProverb();
+
+  const handleSubmit = (values: Proverbs) => {
+    createProverb(values, {
+      onSuccess: () => setOpen(false),
+      onError: (error) => console.error("Error creating proverb:", error),
+    });
+  };
+
+  const toggleDrawer = (state: boolean) => () => {
+    setDrawerOpen(state);
+  };
+
+  const navLinks = (
+    <>
+      <NavLink className="link" to={"/"}>
+        Home
+      </NavLink>
+      <NavLink className="link" to={"/proverbs"}>
+        All Proverbs
+      </NavLink>
+    </>
+  );
+
   return (
-    <Grid sx={navbarSX}>
+    <Grid sx={navbarSX} size={{ xs: 11.2 }}>
       <img src={logo} className="logo" />
-      <Grid className="list">
-        <NavLink className="link" to={"/"}>
-          Home
-        </NavLink>
-        <NavLink className="link" to={"/proverbs"}>
-          All Proverbs
-        </NavLink>
-      </Grid>
-      <Grid className="buttons">
-        <CustomButton
-          variant="outlined"
-          text="Random Proverb"
-          onClick={() => navigate("/proverbs/random")}
-        />
-        <CustomButton variant="contained" text="Add Proverb" />
-      </Grid>
+      {/* Desktop Nav */}
+      {!isMobile && <Grid className="list">{navLinks}</Grid>}
+      {/* Mobile Hamburger */}
+      {isMobile && (
+        <IconButton onClick={toggleDrawer(true)}>{menuIcon()}</IconButton>
+      )}
+      {/* Buttons */}
+      {!isMobile && (
+        <Grid className="buttons">
+          <CustomButton
+            variant="outlined"
+            text="Random Proverb"
+            onClick={() => navigate("/proverbs/random")}
+          />
+          <CustomButton
+            variant="contained"
+            text="Add Proverb"
+            onClick={() => setOpen(true)}
+          />
+        </Grid>
+      )}
+      {/* Mobile Drawer */}
+      <Drawer
+        className="drawer"
+        anchor="left"
+        open={drawerOpen}
+        onClose={toggleDrawer(false)}
+      >
+        <List
+          sx={{ width: 250, height: "100%", backgroundColor: COLOR_SECEONDRY }}
+        >
+          <ListItem>
+            <IconButton onClick={toggleDrawer(false)}>{closeIcon()}</IconButton>
+          </ListItem>
+          <ListItem button onClick={() => navigate("/")}>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button onClick={() => navigate("/proverbs")}>
+            <ListItemText primary="All Proverbs" />
+          </ListItem>
+          <ListItem
+            button
+            onClick={() => {
+              navigate("/proverbs/random");
+              setDrawerOpen(false);
+            }}
+          >
+            <ListItemText primary="Random Proverb" />
+          </ListItem>
+          <ListItem
+            button
+            onClick={() => {
+              setOpen(true);
+              setDrawerOpen(false);
+            }}
+          >
+            <ListItemText primary="Add Proverb" />
+          </ListItem>
+        </List>
+      </Drawer>
+      {/* Form Dialog */}
+      <ProverbForm
+        open={open || false}
+        onClose={() => setOpen(false)}
+        title={"Add Proverb"}
+        initialValues={{
+          persionText: "",
+          englishText: "",
+          germanText: "",
+          meaning: "",
+          categories: [],
+        }}
+        onSubmit={handleSubmit}
+        categoriesData={[]}
+        validationFunctions={validationProverb}
+      />
     </Grid>
   );
 };
@@ -38,9 +143,9 @@ const navbarSX: SxProps<Theme> = {
   px: SPACE_MD,
   py: SPACE_SM,
   top: "16px",
-  margin: "auto",
+  mx: { xs: "8px", md: "auto" },
   display: "flex",
-  width: MAX_WIDTH,
+  maxWidth: MAX_WIDTH,
   position: "sticky",
   borderRadius: "22px",
   alignItems: "center",
