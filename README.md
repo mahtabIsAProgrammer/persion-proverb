@@ -81,14 +81,6 @@ npm install
 npm run dev
 ```
 
-### 🧪 Backend Setup
-
-```bash
-cd backend
-npm install
-npm run start
-```
-
 ---
 
 ## 🌐 Live Demo
