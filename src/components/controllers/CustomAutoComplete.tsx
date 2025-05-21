@@ -16,8 +16,8 @@ import {
   FONT_SMALL_TEXT,
   FONT_WEIGHT_BLOD,
 } from "../../helpers/constants/fonts";
+import { SPACE_SM, SPACE_XS } from "../../helpers/constants/spaces";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
-import { SPACE_MD, SPACE_XS } from "../../helpers/constants/spaces";
 
 interface IOption {
   label: string;
@@ -142,16 +142,16 @@ const autocompleteOptionsSX: SxProps<Theme> = {
   border: "1px solid" + COLOR_PRIMARY,
   "& .MuiAutocomplete-option": {
     mb: SPACE_XS,
+    border: "none",
     display: "flex",
     textAlign: "left",
     alignItems: "center",
     height: "fit-content",
     minHeight: "fit-content",
     width: "97% !important",
-    border: "none",
     justifyContent: "flex-start",
     borderRadius: "",
-    p: SPACE_MD,
+    p: SPACE_SM,
     "& p": {
       height: "max-content",
       color: COLOR_TEXT,

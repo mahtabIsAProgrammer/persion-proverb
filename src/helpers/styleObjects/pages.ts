@@ -44,7 +44,7 @@ export const homeSX: SxProps<Theme> = {
         mt: "20px",
         display: "flex",
         alignItems: "center",
-        justifyContent: "flex-end",
+        justifyContent: { xs: "center", lg: "flex-end" },
         "& a": {
           gap: SPACE_SM,
           display: "flex",
@@ -92,9 +92,9 @@ export const proverbsSX: SxProps<Theme> = {
         display: "flex",
         flexDirection: { xs: "column", lg: "row" },
         flexWrap: { lg: "wrap", xs: "nowrap" },
-        gap: SPACE_SM,
-        rowGap: SPACE_MD,
-        justifyContent: "space-between",
+        rowGap: SPACE_LG,
+        alignItems: "center",
+        justifyContent: { lg: "space-between", xs: "center" },
         "& .no-found": {
           width: "100%",
           height: "400px",
@@ -122,11 +122,12 @@ export const proverbsSX: SxProps<Theme> = {
     },
     "& .filters": {
       mt: "44px",
-      gap: SPACE_LG,
+      gap: { xs: SPACE_XS, md: SPACE_LG },
       px: SPACE_MD,
       width: "100%",
       display: "flex",
       alignItems: "center",
+      flexDirection: { xs: "column", md: "row" },
       "& .search-input": {
         width: "100%",
         "& .MuiInputBase-root": {

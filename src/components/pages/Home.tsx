@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { isEmpty, map, slice } from "lodash";
 
@@ -8,6 +8,7 @@ import { ProverbCard } from "../common/ProverbCard.tsx";
 import { useProverbSearch } from "../../services/hooks.ts";
 import { homeSX } from "../../helpers/styleObjects/pages.ts";
 import { arrowFilledIcon } from "../others/SvgComponents.tsx";
+import { WIDTH_CARD } from "../../helpers/constants/static.ts";
 
 export const Home: FC = () => {
   const { data, isLoading } = useProverbSearch();
@@ -18,8 +19,9 @@ export const Home: FC = () => {
       <Grid className="content">
         <Grid className="cards-container">
           <Grid className="cards-wrapper" container size={{ xs: 12 }}>
-            {!isEmpty(data)
-              ? map(
+            {!isLoading ? (
+              !isEmpty(data) ? (
+                map(
                   slicedData,
                   ({
                     categories,
@@ -28,23 +30,32 @@ export const Home: FC = () => {
                     id,
                     persionText,
                   }) => (
-                    // <Grid
-                    //   // sx={{ width: { xs: "100%", md: undefined } }}
-                    //   size={{ xs: 12 }}
-                    //   key={id}
-                    // >
                     <ProverbCard
-                      isLoading={isLoading}
                       categories={categories}
                       englishText={englishText}
                       germanText={germanText}
                       id={id}
                       persionText={persionText}
                     />
-                    // </Grid>
                   )
                 )
-              : ""}
+              ) : (
+                ""
+              )
+            ) : (
+              <Grid className="cards-wrapper">
+                {map([1, 2], () => (
+                  <Skeleton
+                    sx={{
+                      width: WIDTH_CARD.width,
+                      height: WIDTH_CARD.height,
+                      backgroundColor: "#333333",
+                    }}
+                    variant="rounded"
+                  />
+                ))}
+              </Grid>
+            )}
           </Grid>
           <Grid className="view-all">
             <Link to="/proverbs">See All {arrowFilledIcon()}</Link>

@@ -27,6 +27,7 @@ import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
 
 import vector from "../../assets/images/Vector.webp";
 import background from "../../assets/images/bg-cards.webp";
+import { WIDTH_CARD, WIDTH_CARD_DETAILE } from "../../helpers/constants/static";
 
 export const ProverbCard = memo<IProverbCard>(
   ({
@@ -154,17 +155,18 @@ const proverbCardSX = (
   isDetailPage?: IProverbCard["isDetailPage"],
   isRandomPage?: IProverbCard["isRandomPage"]
 ): SxProps<Theme> => ({
-  width: isDetailPage ? "770px" : "600px",
-  height: isDetailPage ? "645px" : "502px",
-  position: "relative",
-  borderRadius: "8px",
-  backgroundImage: `url(${background})`,
-  backgroundSize: "cover",
-  backgroundColor: "transparent",
-  display: "flex",
-  justifyContent: "center",
-  flexDirection: "column",
   zIndex: 1,
+  display: "flex",
+  borderRadius: "8px",
+  position: "relative",
+  backgroundSize: "cover",
+  flexDirection: "column",
+  justifyContent: "center",
+  backgroundColor: "transparent",
+  backgroundImage: `url(${background})`,
+  width: isDetailPage ? WIDTH_CARD_DETAILE.width : WIDTH_CARD.width,
+  height: isDetailPage ? WIDTH_CARD_DETAILE.height : WIDTH_CARD.height,
+
   "& .text-container": {
     display: "flex",
     flexDirection: "column",
@@ -180,8 +182,8 @@ const proverbCardSX = (
       fontWeight: FONT_WEIGHT_BLOD,
     },
     "& .vector": {
-      width: "29px",
-      mt: "18px",
+      width: { xs: "", sm: "22px", md: "30px" },
+      mt: SPACE_MD,
     },
     "& .text": {
       width: "100%",

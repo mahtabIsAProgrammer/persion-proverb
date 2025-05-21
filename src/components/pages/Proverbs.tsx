@@ -67,12 +67,12 @@ export const Proverbs: FC = () => {
                     persionText,
                   }) => (
                     <ProverbCard
+                      id={id}
+                      key={id}
                       categories={categories}
                       englishText={englishText}
                       germanText={germanText}
-                      id={id}
                       persionText={persionText}
-                      key={id}
                     />
                   )
                 )

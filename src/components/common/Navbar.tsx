@@ -1,33 +1,32 @@
-import { NavLink, useNavigate } from "react-router-dom";
 import {
-  type SxProps,
-  type Theme,
+  Box,
   Drawer,
   Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
   useTheme,
+  IconButton,
+  Typography,
+  type Theme,
   useMediaQuery,
+  type SxProps,
 } from "@mui/material";
 import { useState, type FC } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
-import { ProverbForm } from "./ProverbForm";
-import { MAX_WIDTH } from "../../helpers/constants/static";
-import { CustomButton } from "../controllers/CustomButton";
-import { closeIcon, menuIcon } from "../others/SvgComponents";
 import {
   SPACE_LG,
   SPACE_MD,
   SPACE_SM,
   SPACE_XS,
 } from "../../helpers/constants/spaces";
+import { ProverbForm } from "./ProverbForm";
+import { MAX_WIDTH } from "../../helpers/constants/static";
+import { CustomButton } from "../controllers/CustomButton";
+import { closeIcon, menuIcon } from "../others/SvgComponents";
+import { COLOR_PRIMARY } from "../../helpers/constants/colors";
 import { errorAlert, successAlert } from "../../helpers/utils/messege";
 import { validationProverb } from "../../helpers/utils/validationHandler";
 import { useCreateProverb, useGetCategories } from "../../services/hooks";
 import { FONT_BODY, FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
-import { COLOR_PRIMARY, COLOR_SECEONDRY } from "../../helpers/constants/colors";
 
 import logo from "../../assets/images/logo.webp";
 
@@ -79,7 +78,7 @@ export const Navbar: FC = () => {
 
   return (
     <Grid sx={navbarSX} size={{ xs: 11.2 }}>
-      <img src={logo} className="logo" />
+      <img src={logo} className="logo" onClick={() => navigate("/")} />
       {/* Desktop Nav */}
       {!isMobile && <Grid className="list">{navLinks}</Grid>}
       {/* Mobile Hamburger */}
@@ -101,46 +100,46 @@ export const Navbar: FC = () => {
           />
         </Grid>
       )}
-      {/* Mobile Drawer */}
       <Drawer
         className="drawer"
         anchor="left"
         open={drawerOpen}
         onClose={toggleDrawer(false)}
+        sx={draswerSX}
       >
-        <List
-          sx={{ width: 250, height: "100%", backgroundColor: COLOR_SECEONDRY }}
-        >
-          <ListItem>
-            <IconButton onClick={toggleDrawer(false)}>{closeIcon()}</IconButton>
-          </ListItem>
-          <ListItem component="button" onClick={() => navigate("/")}>
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem component="button" onClick={() => navigate("/proverbs")}>
-            <ListItemText primary="All Proverbs" />
-          </ListItem>
-          <ListItem
-            component="button"
-            onClick={() => {
-              navigate("/proverbs/random");
-              setDrawerOpen(false);
-            }}
+        <Grid className="list-menu">
+          <IconButton className="icon-close" onClick={toggleDrawer(false)}>
+            {closeIcon()}
+          </IconButton>
+          <Typography className="list-item-menu" onClick={() => navigate("/")}>
+            Home
+          </Typography>
+          <Typography
+            className="list-item-menu"
+            onClick={() => navigate("/proverbs")}
           >
-            <ListItemText primary="Random Proverb" />
-          </ListItem>
-          <ListItem
-            component="button"
-            onClick={() => {
-              setOpenAdd(true);
-              setDrawerOpen(false);
-            }}
-          >
-            <ListItemText primary="Add Proverb" />
-          </ListItem>
-        </List>
+            All Proverbs
+          </Typography>
+          <Box className="list-btn-menu">
+            <CustomButton
+              onClick={() => {
+                navigate("/proverbs/random");
+                setDrawerOpen(false);
+              }}
+              text={"Random proverb"}
+            />
+          </Box>
+          <Box className="list-btn-menu">
+            <CustomButton
+              onClick={() => {
+                setOpenAdd(true);
+                setDrawerOpen(false);
+              }}
+              text={"Add proverb"}
+            />
+          </Box>
+        </Grid>
       </Drawer>
-      {/* Form Dialog */}
       <ProverbForm
         open={openAdd || false}
         onClose={() => setOpenAdd(false)}
@@ -164,7 +163,7 @@ const navbarSX: SxProps<Theme> = {
   px: SPACE_MD,
   py: SPACE_SM,
   top: "16px",
-  mx: { xs: SPACE_SM, md: "auto" },
+  mx: { xs: SPACE_SM, lg: "auto" },
   display: "flex",
   maxWidth: MAX_WIDTH,
   position: "sticky",
@@ -176,11 +175,12 @@ const navbarSX: SxProps<Theme> = {
   zIndex: "222",
   "& .logo": {
     width: "150px",
+    cursor: "pointer",
   },
   "& .list": {
     display: "flex",
     gap: SPACE_LG,
-    ml: SPACE_MD,
+    ml: "150px",
     "& .link": {
       position: "relative",
       color: "#FFFFFF",
@@ -208,5 +208,33 @@ const navbarSX: SxProps<Theme> = {
   "& .buttons": {
     display: "flex",
     gap: SPACE_XS,
+  },
+};
+
+const draswerSX: SxProps<Theme> = {
+  "& .list-menu": {
+    width: 250,
+    height: "100%",
+    backgroundColor: "#000",
+    p: SPACE_SM,
+    display: "flex",
+    gap: SPACE_SM,
+    flexDirection: "column",
+    alignItems: "center",
+    "& .list-item-menu": {
+      background: "transparent",
+      mb: SPACE_SM,
+    },
+    "& .list-btn-menu": {
+      width: "100%",
+      background: "transparent",
+      "& .MuiButtonBase-root": {
+        width: "100%",
+      },
+    },
+    "& .icon-close": {
+      width: "100%",
+      justifyContent: "flex-end",
+    },
   },
 };

@@ -18,7 +18,7 @@ import {
   FONT_WEIGHT_BLOD,
 } from "../../helpers/constants/fonts";
 import { closeIcon } from "../others/SvgComponents";
-import { SPACE_2XL, SPACE_LG } from "../../helpers/constants/spaces";
+import { SPACE_2XL, SPACE_LG, SPACE_MD } from "../../helpers/constants/spaces";
 
 interface ICustomDialog extends DialogProps {
   title: string;
@@ -50,8 +50,8 @@ const dialogSX: SxProps<Theme> = {
   width: "100%",
   "& .MuiPaper-root": {
     py: SPACE_LG,
-    px: SPACE_2XL,
-    minWidth: "600px",
+    px: { xs: SPACE_MD, md: SPACE_2XL },
+    minWidth: { xs: "390px", sm: "560px", md: "600px" },
     minHeight: "400px",
     borderRadius: "14px",
     backgroundColor: "#000",
