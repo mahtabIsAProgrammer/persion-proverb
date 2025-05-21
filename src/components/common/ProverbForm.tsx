@@ -7,6 +7,7 @@ import { CustomDialog } from "../controllers/CustomDialog";
 import { CustomButton } from "../controllers/CustomButton";
 import { CustomTextfield } from "../controllers/CustomTextfield";
 import { CustomAutoComplete } from "../controllers/CustomAutoComplete";
+import { SPACE_LG, SPACE_MD, SPACE_XL } from "../../helpers/constants/spaces";
 
 export const ProverbForm = memo<IProverbForm>(
   ({
@@ -109,9 +110,9 @@ const proverbFormSX: SxProps<Theme> = {
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
-    gap: "14px",
-    mt: "20px",
-    mb: "30px",
+    gap: SPACE_MD,
+    mt: SPACE_LG,
+    mb: SPACE_XL,
     "& .text-area": {
       "& .MuiInputBase-root": {
         height: "auto !important",
@@ -122,8 +123,8 @@ const proverbFormSX: SxProps<Theme> = {
     display: "flex",
     width: "100%",
     justifyContent: "center",
-    gap: "18px",
-    mt: "16px",
+    gap: SPACE_MD,
+    mt: SPACE_MD,
     "& button": {
       width: "200px",
     },

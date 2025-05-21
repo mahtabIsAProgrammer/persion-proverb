@@ -8,8 +8,9 @@ import {
 } from "@mui/material";
 import { type DOMAttributes, memo } from "react";
 
-import { FONT_WEIGHT_BLOD } from "../../helpers/constants/fonts";
+import { FONT_BUTTON, FONT_WEIGHT_BLOD } from "../../helpers/constants/fonts";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
+import { SPACE_LG, SPACE_SM } from "../../helpers/constants/spaces";
 
 export type TCustomButton = ButtonTypeMap<
   {
@@ -33,13 +34,13 @@ export const CustomButton = memo<TCustomButton>(
 );
 
 const buttonSX: SxProps<Theme> = {
-  px: "22px",
-  py: "10px",
+  px: SPACE_LG,
+  py: SPACE_SM,
   fontWeight: FONT_WEIGHT_BLOD,
   lineHeight: "22px",
   boxShadow: "none",
   borderRadius: "20px",
-  fontSize: "16px",
+  fontSize: FONT_BUTTON,
   textTransform: "capitalize",
   outline: "1px solid transparent",
   "&.MuiButton-contained": {

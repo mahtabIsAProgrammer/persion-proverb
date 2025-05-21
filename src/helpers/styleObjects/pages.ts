@@ -1,6 +1,12 @@
 import type { SxProps, Theme } from "@mui/material";
 
-import { SPACE_2XL } from "../constants/spaces";
+import {
+  SPACE_2XL,
+  SPACE_LG,
+  SPACE_MD,
+  SPACE_SM,
+  SPACE_XS,
+} from "../constants/spaces";
 import { MAX_WIDTH } from "./../constants/static";
 import { FONT_WEIGHT_BLOD } from "../constants/fonts";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../constants/colors";
@@ -16,7 +22,7 @@ export const homeSX: SxProps<Theme> = {
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   backgroundAttachment: "fixed",
-  pb: "40px",
+  pb: SPACE_2XL,
   "& .content": {
     width: "100%",
     mx: "auto",
@@ -30,8 +36,7 @@ export const homeSX: SxProps<Theme> = {
         display: "flex",
         flexDirection: { xs: "column", lg: "row" },
         flexWrap: { lg: "wrap", xs: "nowrap" },
-        // gap: "6px",
-        rowGap: "24px",
+        rowGap: SPACE_LG,
         alignItems: "center",
         justifyContent: { lg: "space-between", xs: "center" },
       },
@@ -41,7 +46,7 @@ export const homeSX: SxProps<Theme> = {
         alignItems: "center",
         justifyContent: "flex-end",
         "& a": {
-          gap: "8px",
+          gap: SPACE_SM,
           display: "flex",
           fontSize: "28px",
           color: COLOR_TEXT,
@@ -75,7 +80,7 @@ export const proverbsSX: SxProps<Theme> = {
   backgroundPosition: "center",
   backgroundRepeat: "repeat",
   backgroundAttachment: "fixed",
-  pb: "40px",
+  pb: SPACE_2XL,
   "& .content": {
     width: "100%",
     margin: "auto",
@@ -87,8 +92,8 @@ export const proverbsSX: SxProps<Theme> = {
         display: "flex",
         flexDirection: { xs: "column", lg: "row" },
         flexWrap: { lg: "wrap", xs: "nowrap" },
-        gap: "6px",
-        rowGap: "24px",
+        gap: SPACE_SM,
+        rowGap: SPACE_MD,
         justifyContent: "space-between",
         "& .no-found": {
           width: "100%",
@@ -107,7 +112,7 @@ export const proverbsSX: SxProps<Theme> = {
         fontSize: "28px",
         fontWeight: FONT_WEIGHT_BLOD,
         display: "flex",
-        gap: "8px",
+        gap: SPACE_SM,
         textDecoration: "none",
         color: COLOR_TEXT,
         justifyContent: "flex-end",
@@ -117,8 +122,8 @@ export const proverbsSX: SxProps<Theme> = {
     },
     "& .filters": {
       mt: "44px",
-      gap: "24px",
-      px: "12px",
+      gap: SPACE_LG,
+      px: SPACE_MD,
       width: "100%",
       display: "flex",
       alignItems: "center",
@@ -164,15 +169,15 @@ export const proverbsSX: SxProps<Theme> = {
 export const menuItemSX = {
   "& .MuiMenu-paper": {
     mt: "4px",
-    py: "12px",
+    py: SPACE_MD,
     maxHeight: "340px",
     background: "#000000",
     borderRadius: "12px",
     boxShadow: "0px 4px 6px -2px #A3A3A308, 0px 0px 0px -4px #A3A3A308",
   },
   "& .MuiList-root": {
-    px: "12px",
-    gap: "4px",
+    px: SPACE_MD,
+    gap: SPACE_XS,
     display: "flex",
     maxHeight: "190px",
     alignItems: "center",
@@ -200,7 +205,7 @@ export const proverbDetailsSX: SxProps<Theme> = {
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   backgroundAttachment: "fixed",
-  pb: "40px",
+  pb: SPACE_2XL,
   "& .content": {
     width: "100%",
     margin: "auto",

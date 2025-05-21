@@ -1,11 +1,9 @@
-// ConfirmDeleteDialog.tsx
-import {
-  Dialog,
-  Button,
-  DialogTitle,
-  DialogActions,
-  DialogContent,
-} from "@mui/material";
+import { Typography } from "@mui/material";
+
+import { FONT_BODY } from "../../helpers/constants/fonts";
+import { CustomDialog } from "../controllers/CustomDialog";
+import { CustomButton } from "../controllers/CustomButton";
+import { SPACE_LG, SPACE_MD } from "../../helpers/constants/spaces";
 
 interface ConfirmDeleteDialogProps {
   open: boolean;
@@ -19,31 +17,41 @@ export const ConfirmDeleteDialog = ({
   onConfirm,
 }: ConfirmDeleteDialogProps) => {
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      PaperProps={{
-        sx: {
-          backgroundColor: "#1e1e1e",
+    <CustomDialog
+      sx={{
+        "& .MuiPaper-root": {
           color: "#fff",
-          border: "2px solid #B96400",
           borderRadius: 2,
+          minWidth: "200px !important",
+          minHeight: "200px !important",
+          backgroundColor: "#1e1e1e",
+          border: "2px solid #B96400",
+          maxWidth: "400px",
+          py: SPACE_MD,
+          px: SPACE_LG,
+
+          "& .MuiDialogTitle-root": {
+            "& .dialog-title": {
+              fontSize: FONT_BODY,
+            },
+          },
         },
       }}
-    >
-      <DialogTitle sx={{ color: "#B96400" }}>Confirm Deletion</DialogTitle>
-      <DialogContent sx={{ fontSize: "1rem" }}>
-        Are you sure you want to delete this proverb? This action cannot be
-        undone.
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} sx={{ color: "#B96400" }}>
-          Cancel
-        </Button>
-        <Button onClick={onConfirm} sx={{ color: "#B96400" }} autoFocus>
-          Delete
-        </Button>
-      </DialogActions>
-    </Dialog>
+      dialogAction={
+        <>
+          <CustomButton text="Cancel" onClick={onClose} />
+          <CustomButton text="Delete" onClick={onConfirm} />
+        </>
+      }
+      dialogContent={
+        <Typography sx={{ textAlign: "center" }}>
+          Are you sure you want to delete this proverb? This action cannot be
+          undone.
+        </Typography>
+      }
+      title={"Delete Confirmation"}
+      onClose={onClose}
+      open={open}
+    />
   );
 };

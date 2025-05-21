@@ -15,7 +15,10 @@ import { Loading } from "../common/Loading";
 import { useProverbSearch } from "../../services/hooks";
 import { FONT_FAMILY } from "../../helpers/constants/static";
 import { mainLayoutSX } from "../../helpers/styleObjects/main";
-import { FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
+import {
+  FONT_SMALL_TEXT,
+  FONT_WEIGHT_REGULAR,
+} from "../../helpers/constants/fonts";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
 import { SnackbarProvider } from "notistack";
 import { errorAlertICON, successAlertICON } from "../others/SvgComponents";
@@ -60,7 +63,7 @@ const MainLayout: FC = () => {
             direction: "ltr",
             backgroundColor: "#000",
             color: "#fff",
-            fontSize: "14px",
+            fontSize: FONT_SMALL_TEXT,
             fontStyle: "normal",
             fontWeight: "700",
             lineHeight: "normal",

@@ -11,8 +11,16 @@ import {
   FONT_WEIGHT_BLOD,
   FONT_HEADING_SMALL,
   FONT_HEADING_MEDIUM,
+  FONT_BODY,
+  FONT_TITLE,
 } from "../../helpers/constants/fonts";
-import { SPACE_SM } from "../../helpers/constants/spaces";
+import {
+  SPACE_LG,
+  SPACE_MD,
+  SPACE_SM,
+  SPACE_XL,
+  SPACE_XS,
+} from "../../helpers/constants/spaces";
 import { CustomButton } from "../controllers/CustomButton";
 import { CustomTooltip } from "../controllers/CustomTooltip";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
@@ -160,9 +168,9 @@ const proverbCardSX = (
   "& .text-container": {
     display: "flex",
     flexDirection: "column",
-    py: "20px",
-    px: "32px",
-    gap: "14px",
+    py: SPACE_LG,
+    px: SPACE_XL,
+    gap: SPACE_MD,
     mb: SPACE_SM,
     "& .title": {
       color: COLOR_PRIMARY,
@@ -176,30 +184,30 @@ const proverbCardSX = (
       mt: "18px",
     },
     "& .text": {
-      color: COLOR_TEXT,
-      fontSize: "25px",
-      textAlign: "center",
       width: "100%",
+      color: COLOR_TEXT,
+      fontSize: FONT_TITLE,
+      textAlign: "center",
       "&.persion": {
-        fontFamily: "YekanBakh !important",
-        fontSize: FONT_HEADING_MEDIUM,
         lineHeight: "22px",
+        fontSize: FONT_HEADING_MEDIUM,
+        fontFamily: "YekanBakh !important",
       },
     },
     "& .categories-wrapper": {
+      gap: SPACE_XS,
       display: "flex",
       alignItems: "center",
-      gap: "4px",
       "& .categories": {
-        fontSize: "16px",
         color: COLOR_TEXT,
+        fontSize: FONT_BODY,
         fontWeight: FONT_WEIGHT_BLOD,
       },
     },
   },
   "& .btn-view-wrapper": {
     mb: "10px",
-    gap: "12px",
+    gap: SPACE_MD,
     display: "flex",
     justifyContent: "center",
     ...(isDetailPage || isRandomPage

@@ -3,26 +3,36 @@ import { memo, type JSX } from "react";
 import {
   type Theme,
   Dialog,
-  type SxProps,
-  type DialogProps,
-  DialogContent,
-  DialogTitle,
   Typography,
   IconButton,
+  DialogTitle,
+  type SxProps,
+  DialogContent,
+  DialogActions,
+  type DialogProps,
 } from "@mui/material";
+import { merge } from "lodash";
+
+import {
+  FONT_HEADING_SMALL,
+  FONT_WEIGHT_BLOD,
+} from "../../helpers/constants/fonts";
 import { closeIcon } from "../others/SvgComponents";
-import { FONT_WEIGHT_BLOD } from "../../helpers/constants/fonts";
+import { SPACE_2XL, SPACE_LG } from "../../helpers/constants/spaces";
 
 interface ICustomDialog extends DialogProps {
-  dialogContent: JSX.Element;
   title: string;
+  dialogContent: JSX.Element;
+  dialogAction?: JSX.Element;
   onClose: TEmptyFunctionVoid;
 }
 
 export const CustomDialog = memo<ICustomDialog>(
-  ({ dialogContent, open, onClose, title }) => {
+  ({ dialogContent, open, sx, onClose, title, dialogAction }) => {
+    const mergeSx = merge({}, dialogSX, sx);
+
     return (
-      <Dialog sx={dialogSX} open={open}>
+      <Dialog sx={mergeSx} open={open}>
         <DialogTitle>
           <Typography className="dialog-title">{title}</Typography>
           <IconButton className="close-icon" onClick={onClose}>
@@ -30,6 +40,7 @@ export const CustomDialog = memo<ICustomDialog>(
           </IconButton>
         </DialogTitle>
         <DialogContent>{dialogContent}</DialogContent>
+        {dialogAction && <DialogActions>{dialogAction}</DialogActions>}
       </Dialog>
     );
   }
@@ -38,14 +49,14 @@ export const CustomDialog = memo<ICustomDialog>(
 const dialogSX: SxProps<Theme> = {
   width: "100%",
   "& .MuiPaper-root": {
-    px: "50px",
-    py: "28px",
+    py: SPACE_LG,
+    px: SPACE_2XL,
     minWidth: "600px",
     minHeight: "400px",
     borderRadius: "14px",
     backgroundColor: "#000",
     "& .MuiDialogContent-root": {
-      p: "0px",
+      p: 0,
       width: "100%",
       display: "flex",
       alignItems: "center",
@@ -54,13 +65,16 @@ const dialogSX: SxProps<Theme> = {
     },
     "& .MuiDialogTitle-root": {
       display: "flex",
-      justifyContent: "space-between",
       alignItems: "center",
-      p: "0",
+      justifyContent: "space-between",
+      p: 0,
       "& .dialog-title": {
-        fontSize: "22px",
+        fontSize: FONT_HEADING_SMALL,
         fontWeight: FONT_WEIGHT_BLOD,
       },
+    },
+    "& .MuiDialogActions-root": {
+      justifyContent: "center",
     },
   },
 };

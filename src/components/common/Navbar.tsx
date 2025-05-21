@@ -17,7 +17,12 @@ import { ProverbForm } from "./ProverbForm";
 import { MAX_WIDTH } from "../../helpers/constants/static";
 import { CustomButton } from "../controllers/CustomButton";
 import { closeIcon, menuIcon } from "../others/SvgComponents";
-import { SPACE_MD, SPACE_SM } from "../../helpers/constants/spaces";
+import {
+  SPACE_LG,
+  SPACE_MD,
+  SPACE_SM,
+  SPACE_XS,
+} from "../../helpers/constants/spaces";
 import { errorAlert, successAlert } from "../../helpers/utils/messege";
 import { validationProverb } from "../../helpers/utils/validationHandler";
 import { useCreateProverb, useGetCategories } from "../../services/hooks";
@@ -159,7 +164,7 @@ const navbarSX: SxProps<Theme> = {
   px: SPACE_MD,
   py: SPACE_SM,
   top: "16px",
-  mx: { xs: "8px", md: "auto" },
+  mx: { xs: SPACE_SM, md: "auto" },
   display: "flex",
   maxWidth: MAX_WIDTH,
   position: "sticky",
@@ -174,8 +179,8 @@ const navbarSX: SxProps<Theme> = {
   },
   "& .list": {
     display: "flex",
-    gap: "26px",
-    ml: "20px",
+    gap: SPACE_LG,
+    ml: SPACE_MD,
     "& .link": {
       position: "relative",
       color: "#FFFFFF",
@@ -202,6 +207,6 @@ const navbarSX: SxProps<Theme> = {
   },
   "& .buttons": {
     display: "flex",
-    gap: "6px",
+    gap: SPACE_XS,
   },
 };

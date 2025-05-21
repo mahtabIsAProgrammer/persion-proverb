@@ -11,8 +11,13 @@ import { memo } from "react";
 import { filter, isArray } from "lodash";
 
 import { CustomTextfield } from "./CustomTextfield";
-import { FONT_WEIGHT_BLOD } from "../../helpers/constants/fonts";
+import {
+  FONT_CAPTION,
+  FONT_SMALL_TEXT,
+  FONT_WEIGHT_BLOD,
+} from "../../helpers/constants/fonts";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
+import { SPACE_MD, SPACE_XS } from "../../helpers/constants/spaces";
 
 interface IOption {
   label: string;
@@ -125,18 +130,18 @@ const customAutoCompleteSX: SxProps<Theme> = {
   },
 };
 const autocompleteOptionsSX: SxProps<Theme> = {
-  p: "0",
+  p: 0,
   overflowY: "auto",
   maxHeight: "150px",
-  fontSize: "14px",
-  gap: "0",
+  fontSize: FONT_SMALL_TEXT,
+  gap: 0,
   display: "flex",
   flexDirection: "column",
   backgroundColor: "#000",
   borderRadius: "8px",
   border: "1px solid" + COLOR_PRIMARY,
   "& .MuiAutocomplete-option": {
-    mb: "4px",
+    mb: SPACE_XS,
     display: "flex",
     textAlign: "left",
     alignItems: "center",
@@ -146,12 +151,11 @@ const autocompleteOptionsSX: SxProps<Theme> = {
     border: "none",
     justifyContent: "flex-start",
     borderRadius: "",
-    px: "12px",
-    py: "12px",
+    p: SPACE_MD,
     "& p": {
       height: "max-content",
       color: COLOR_TEXT,
-      fontSize: "12px",
+      fontSize: FONT_CAPTION,
       fontWeight: FONT_WEIGHT_BLOD,
     },
     "& .local-checkbox": {

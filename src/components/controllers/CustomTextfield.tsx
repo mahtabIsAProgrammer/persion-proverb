@@ -11,7 +11,11 @@ import {
 } from "@mui/material";
 
 import { errorIcon } from "../others/SvgComponents";
-import { FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
+import {
+  FONT_CAPTION,
+  FONT_SMALL_TEXT,
+  FONT_WEIGHT_REGULAR,
+} from "../../helpers/constants/fonts";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
 
 export type TCustomTextfield =
@@ -53,7 +57,7 @@ const textfieldSX: SxProps<Theme> = {
         border: "1px solid" + COLOR_PRIMARY,
       },
       "& .MuiInputBase-input": {
-        fontSize: "14px",
+        fontSize: FONT_SMALL_TEXT,
         fontWeight: FONT_WEIGHT_REGULAR,
         color: COLOR_TEXT,
       },
@@ -74,7 +78,7 @@ const textfieldSX: SxProps<Theme> = {
   },
   "& .error-messege": {
     color: "red",
-    fontSize: "12px",
+    fontSize: FONT_CAPTION,
     mt: "4px",
     display: "flex",
     alignItems: "center",

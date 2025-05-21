@@ -10,8 +10,9 @@ import {
   type TooltipProps,
 } from "@mui/material";
 
-import { FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
+import { FONT_BODY, FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
 import { COLOR_SECEONDRY, COLOR_TEXT } from "../../helpers/constants/colors";
+import { SPACE_XS } from "../../helpers/constants/spaces";
 
 type TCustomTooltip = {
   dir?: string;
@@ -70,13 +71,13 @@ const localTooltipSX = (
   "& .title-tooltip": {
     wordBreak: "break-all",
     lineHeight: "32px",
-    fontSize: "24px",
+    fontSize: FONT_BODY,
     fontWeight: FONT_WEIGHT_REGULAR,
   },
 });
 
 const IconTooltipSX: SxProps<Theme> = {
-  px: "4px",
+  px: SPACE_XS,
   display: "flex",
   minWidth: "20px",
   minHeight: "20px",
