@@ -2,16 +2,17 @@ import { memo } from "react";
 
 import {
   Grid,
+  TextField,
+  Typography,
   type Theme,
   type SxProps,
-  TextField,
   type TextFieldProps,
   type TextFieldVariants,
-  Typography,
 } from "@mui/material";
-import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
-import { FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
+
 import { errorIcon } from "../others/SvgComponents";
+import { FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
+import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
 
 export type TCustomTextfield =
   | {
@@ -24,8 +25,10 @@ export const CustomTextfield = memo<TCustomTextfield>(
     return (
       <Grid className="textfield-wrapper" sx={textfieldSX}>
         <TextField {...props} />
-
-        {errorMessege && (
+        {!errorMessege?.text && (
+          <Typography sx={{ height: "18px" }}></Typography>
+        )}
+        {errorMessege?.text && (
           <Typography className="error-messege">
             {errorIcon()}
             {errorMessege.text}
@@ -37,6 +40,7 @@ export const CustomTextfield = memo<TCustomTextfield>(
 );
 
 const textfieldSX: SxProps<Theme> = {
+  width: "100%",
   display: "flex",
   flexDirection: "column",
   "& .MuiTextField-root": {

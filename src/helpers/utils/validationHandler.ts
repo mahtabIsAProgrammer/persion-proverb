@@ -6,6 +6,5 @@ export const validationProverb = () => {
     englishText: string().trim().required("the input is required"),
     germanText: string().trim().required("the input is required"),
     meaning: string().trim().required("the input is required"),
-    categories: string().trim().required("the input is required"),
   });
 };

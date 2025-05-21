@@ -3,7 +3,6 @@ import { Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import { Navbar } from "../common/Navbar";
-import type { Proverbs } from "../../services/api";
 import { ProverbCard } from "../common/ProverbCard";
 import { useGetProverbRandom } from "../../services/hooks";
 import { proverbDetailsSX } from "../../helpers/styleObjects/pages";
@@ -11,7 +10,6 @@ import { proverbDetailsSX } from "../../helpers/styleObjects/pages";
 export const ProverbRandom: FC = () => {
   const { id: currentId } = useParams();
   const { data: getProverbById, isLoading } = useGetProverbRandom();
-  console.log("🚀 ~ getProverbById:", getProverbById);
 
   const { categories, englishText, germanText, meaning, persionText } =
     (getProverbById as { data: Proverbs } | undefined)?.data ?? {};

@@ -46,9 +46,9 @@ export const Home: FC = () => {
                 )
               : ""}
           </Grid>
-          <Link className="view-all" to="/proverbs">
-            See All {arrowFilledIcon()}
-          </Link>
+          <Grid className="view-all">
+            <Link to="/proverbs">See All {arrowFilledIcon()}</Link>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

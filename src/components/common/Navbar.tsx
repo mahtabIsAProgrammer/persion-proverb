@@ -9,21 +9,21 @@ import {
   ListItem,
   ListItemText,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
+import { useState } from "react";
 
+import { ProverbForm } from "./ProverbForm";
 import { MAX_WIDTH } from "../../helpers/constants/static";
 import { CustomButton } from "../controllers/CustomButton";
+import { closeIcon, menuIcon } from "../others/SvgComponents";
 import { SPACE_MD, SPACE_SM } from "../../helpers/constants/spaces";
+import { validationProverb } from "../../helpers/utils/validationHandler";
+import { useCreateProverb, useGetCategories } from "../../services/hooks";
 import { FONT_BODY, FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
+import { COLOR_PRIMARY, COLOR_SECEONDRY } from "../../helpers/constants/colors";
 
 import logo from "../../assets/images/logo.webp";
-import { COLOR_PRIMARY, COLOR_SECEONDRY } from "../../helpers/constants/colors";
-import { ProverbForm } from "./ProverbForm";
-import { useState } from "react";
-import { validationProverb } from "../../helpers/utils/validationHandler";
-import { useCreateProverb } from "../../services/hooks";
-import { useMediaQuery } from "@mui/system";
-import { closeIcon, menuIcon } from "../others/SvgComponents";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -32,8 +32,12 @@ export const Navbar = () => {
   const [open, setOpen] = useState<boolean | undefined>();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const { mutate: createProverb } = useCreateProverb();
+  const { data: getCategories } = useGetCategories();
 
+  const categoriesData =
+    (getCategories as { data: string[] } | undefined)?.data ?? [];
+
+  const { mutate: createProverb } = useCreateProverb();
   const handleSubmit = (values: Proverbs) => {
     createProverb(values, {
       onSuccess: () => setOpen(false),
@@ -93,14 +97,14 @@ export const Navbar = () => {
           <ListItem>
             <IconButton onClick={toggleDrawer(false)}>{closeIcon()}</IconButton>
           </ListItem>
-          <ListItem button onClick={() => navigate("/")}>
+          <ListItem component="button" onClick={() => navigate("/")}>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button onClick={() => navigate("/proverbs")}>
+          <ListItem component="button" onClick={() => navigate("/proverbs")}>
             <ListItemText primary="All Proverbs" />
           </ListItem>
           <ListItem
-            button
+            component="button"
             onClick={() => {
               navigate("/proverbs/random");
               setDrawerOpen(false);
@@ -109,7 +113,7 @@ export const Navbar = () => {
             <ListItemText primary="Random Proverb" />
           </ListItem>
           <ListItem
-            button
+            component="button"
             onClick={() => {
               setOpen(true);
               setDrawerOpen(false);
@@ -132,7 +136,7 @@ export const Navbar = () => {
           categories: [],
         }}
         onSubmit={handleSubmit}
-        categoriesData={[]}
+        categoriesData={categoriesData ?? []}
         validationFunctions={validationProverb}
       />
     </Grid>

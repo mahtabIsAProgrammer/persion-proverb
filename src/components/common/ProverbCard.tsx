@@ -1,6 +1,3 @@
-import { memo } from "react";
-import { isArray, map } from "lodash";
-import { useNavigate } from "react-router-dom";
 import {
   Grid,
   Box,
@@ -9,16 +6,22 @@ import {
   Typography,
   Skeleton,
 } from "@mui/material";
+import { memo } from "react";
+import { isArray } from "lodash";
+import { useNavigate } from "react-router-dom";
 
+import {
+  arrayToCustomString,
+  slicedTextHandler,
+} from "../../helpers/utils/others";
+import {
+  FONT_WEIGHT_BLOD,
+  FONT_HEADING_SMALL,
+  FONT_HEADING_MEDIUM,
+} from "../../helpers/constants/fonts";
 import { SPACE_SM } from "../../helpers/constants/spaces";
 import { CustomButton } from "../controllers/CustomButton";
 import { CustomTooltip } from "../controllers/CustomTooltip";
-import { slicedTextHandler } from "../../helpers/utils/others";
-import {
-  FONT_HEADING_MEDIUM,
-  FONT_HEADING_SMALL,
-  FONT_WEIGHT_BLOD,
-} from "../../helpers/constants/fonts";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
 
 import vector from "../../assets/images/Vector.webp";
@@ -121,7 +124,9 @@ export const ProverbCard = memo<IProverbCard>(
           <Grid className="categories-wrapper">
             <Typography className="title">Categories →</Typography>
             <Typography className="categories">
-              {isArray(categories) ? map(categories, (cat) => cat) : categories}
+              {isArray(categories)
+                ? arrayToCustomString(categories, " - ")
+                : categories}
             </Typography>
           </Grid>
         </Grid>

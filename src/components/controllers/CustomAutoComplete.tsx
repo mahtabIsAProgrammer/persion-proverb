@@ -1,13 +1,18 @@
 import {
-  Autocomplete,
   Chip,
   Grid,
-  type AutocompleteProps,
-  type SxProps,
+  Autocomplete,
   type Theme,
+  type SxProps,
+  type AutocompleteProps,
+  type FilterOptionsState,
 } from "@mui/material";
 import { memo } from "react";
+import { filter, isArray } from "lodash";
+
 import { CustomTextfield } from "./CustomTextfield";
+import { FONT_WEIGHT_BLOD } from "../../helpers/constants/fonts";
+import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
 
 interface IOption {
   label: string;
@@ -26,9 +31,57 @@ interface ICustomAutoComplete
   > {
   loading?: boolean;
   errorMessege?: { text: string };
+  label: string;
 }
+const filterOptions = (
+  options: IOption[],
+  params: FilterOptionsState<IOption>
+) => {
+  //const filtered = filter(options, params);
+  const { inputValue } = params;
+  const filtered = filter(options, ({ label }) => {
+    return label?.toLowerCase()?.includes(inputValue);
+  });
+
+  return filtered;
+};
+
+const renderValue = (
+  value: (string | IOption)[] | string | IOption,
+  getItemProps: TAny
+) => {
+  const safeArray = isArray(value) ? value : [value];
+
+  return safeArray.map((option: IOption | string, index: number) => {
+    const { key, ...itemProps } = getItemProps({ index });
+
+    return (
+      <Chip
+        variant="outlined"
+        sx={{
+          color: COLOR_TEXT,
+          "& .MuiChip-deleteIcon": {
+            color: COLOR_PRIMARY,
+            "&:hover": {
+              transition: "0.4s",
+              color: COLOR_PRIMARY + "80",
+            },
+          },
+        }}
+        label={
+          typeof option === "object" && "label" in option
+            ? option.label
+            : option
+        }
+        key={key}
+        {...itemProps}
+      />
+    );
+  });
+};
+
 export const CustomAutoComplete = memo<ICustomAutoComplete>(
-  ({ errorMessege, options, ...props }) => {
+  ({ errorMessege, options, label, ...props }) => {
     return (
       <Grid
         sx={customAutoCompleteSX}
@@ -39,39 +92,22 @@ export const CustomAutoComplete = memo<ICustomAutoComplete>(
           multiple
           freeSolo
           {...props}
+          id="tags-filled"
           options={options}
-          getOptionLabel={(option) =>
-            typeof option === "string" ? option : option.label
+          // getOptionLabel={(option) =>
+          //   typeof option === "string" ? option : option.label
+          // }
+          // isOptionEqualToValue={(option, value) => option.value === value.value}
+          slotProps={{ listbox: { sx: autocompleteOptionsSX } }}
+          filterOptions={(options: IOption[], params) =>
+            filterOptions(options, params)
           }
-          renderValue={(selected) =>
-            selected?.map((option, index) => (
-              <Chip
-                key={index}
-                label={typeof option === "string" ? option : option.label}
-                sx={{ margin: "2px", backgroundColor: "red", color: "white" }}
-              />
-            ))
-          }
-          // popupIcon={<LocalIcon src={arrowDownICON(COLOR_TEXT)} />}
-          renderInput={({
-            id,
-            size,
-            disabled,
-            fullWidth,
-            inputProps,
-            InputProps,
-          }) => (
+          renderValue={(value, getTagProps) => renderValue(value, getTagProps)}
+          renderInput={(params) => (
             <CustomTextfield
               sx={{ textAlign: "right" }}
-              {...{
-                id,
-                size,
-                disabled,
-                fullWidth,
-                inputProps,
-                InputProps,
-                InputLabelProps: { required: false },
-              }}
+              {...params}
+              label={label}
               errorMessege={errorMessege}
             />
           )}
@@ -83,12 +119,51 @@ export const CustomAutoComplete = memo<ICustomAutoComplete>(
 
 const customAutoCompleteSX: SxProps<Theme> = {
   width: "100%",
-  "& .MuiAutocomplete-tag": {
-    backgroundColor: "red",
-    color: "#fff",
-  },
-  "& .MuiAutocomplete-popper .MuiPaper-root": {
+  "& .MuiPaper-root": {
     backgroundColor: "#000",
-    color: "#fff",
+    border: "1px solid" + COLOR_PRIMARY,
+  },
+};
+const autocompleteOptionsSX: SxProps<Theme> = {
+  p: "0",
+  overflowY: "auto",
+  maxHeight: "150px",
+  fontSize: "14px",
+  gap: "0",
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: "#000",
+  borderRadius: "8px",
+  border: "1px solid" + COLOR_PRIMARY,
+  "& .MuiAutocomplete-option": {
+    mb: "4px",
+    display: "flex",
+    textAlign: "left",
+    alignItems: "center",
+    height: "fit-content",
+    minHeight: "fit-content",
+    width: "97% !important",
+    border: "none",
+    justifyContent: "flex-start",
+    borderRadius: "",
+    px: "12px",
+    py: "12px",
+    "& p": {
+      height: "max-content",
+      color: COLOR_TEXT,
+      fontSize: "12px",
+      fontWeight: FONT_WEIGHT_BLOD,
+    },
+    "& .local-checkbox": {
+      width: "24px",
+      height: "24px",
+    },
+    "&:hover": {
+      backgroundColor: COLOR_PRIMARY + "30",
+    },
+  },
+
+  "&::-webkit-scrollbar": {
+    width: "2px",
   },
 };

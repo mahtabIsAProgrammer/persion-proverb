@@ -1,7 +1,7 @@
-import { type FC, useEffect, useState } from "react";
+import { type FC, useEffect } from "react";
 
-import { useLocation, useRoutes } from "react-router-dom";
 import { Grid, ThemeProvider } from "@mui/material";
+import { useLocation, useRoutes } from "react-router-dom";
 
 import {
   createTheme,
@@ -12,15 +12,16 @@ import {
 
 import { routes } from "../../routes";
 import { Loading } from "../common/Loading";
+import { useProverbSearch } from "../../services/hooks";
 import { FONT_FAMILY } from "../../helpers/constants/static";
 import { mainLayoutSX } from "../../helpers/styleObjects/main";
 import { FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const MainLayout: FC = () => {
   const children = useRoutes(routes);
-  const queryClient = new QueryClient();
+
+  const { isLoading } = useProverbSearch();
 
   const { pathname } = useLocation();
 
@@ -34,43 +35,22 @@ const MainLayout: FC = () => {
 
   const materialTheme = materialExtendTheme(themeMUI);
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, [pathname]);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={themeMUI}>
-        <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <Grid sx={mainLayoutSX} className="main-layout">
-              {children}
-            </Grid>
-          )}
-        </MaterialCssVarsProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ThemeProvider theme={themeMUI}>
+      <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <Grid sx={mainLayoutSX} className="main-layout">
+            {children}
+          </Grid>
+        )}
+      </MaterialCssVarsProvider>
+    </ThemeProvider>
   );
 };
 

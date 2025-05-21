@@ -1,6 +1,7 @@
 import { Grid, Box, type SxProps, type Theme } from "@mui/material";
 
 import loading from "../../assets/images/loading.gif";
+import background from "../../assets/images/background.webp";
 
 export const Loading = () => {
   return (
@@ -16,8 +17,9 @@ const laodingSX: SxProps<Theme> = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  backgroundImage: `url(${background})`,
   backgroundColor: "#000",
   "& .img-loading": {
-    width: "160px",
+    width: "600px",
   },
 };

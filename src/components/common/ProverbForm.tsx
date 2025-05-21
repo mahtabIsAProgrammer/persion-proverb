@@ -1,12 +1,12 @@
 import { memo } from "react";
+import { isArray } from "lodash";
+import { useFormik } from "formik";
 import { Box, Grid, type SxProps, type Theme } from "@mui/material";
 
 import { CustomDialog } from "../controllers/CustomDialog";
-import { CustomTextfield } from "../controllers/CustomTextfield";
 import { CustomButton } from "../controllers/CustomButton";
+import { CustomTextfield } from "../controllers/CustomTextfield";
 import { CustomAutoComplete } from "../controllers/CustomAutoComplete";
-
-import { useFormik } from "formik";
 
 export const ProverbForm = memo<IProverbForm>(
   ({
@@ -14,9 +14,9 @@ export const ProverbForm = memo<IProverbForm>(
     onClose,
     title,
     initialValues,
-    validationFunctions,
     onSubmit,
     categoriesData,
+    validationFunctions,
   }) => {
     const formIK = useFormik({
       initialValues,
@@ -51,18 +51,21 @@ export const ProverbForm = memo<IProverbForm>(
                 label="Persian Text"
                 value={formIK.values.persionText}
                 onChange={formIK.handleChange}
+                errorMessege={{ text: formIK.errors.persionText ?? "" }}
               />
               <CustomTextfield
                 name="englishText"
                 label="English Text"
                 value={formIK.values.englishText}
                 onChange={formIK.handleChange}
+                errorMessege={{ text: formIK.errors.englishText ?? "" }}
               />
               <CustomTextfield
                 name="germanText"
                 label="German Text"
                 value={formIK.values.germanText}
                 onChange={formIK.handleChange}
+                errorMessege={{ text: formIK.errors.germanText ?? "" }}
               />
               <CustomTextfield
                 name="meaning"
@@ -72,22 +75,20 @@ export const ProverbForm = memo<IProverbForm>(
                 className="text-area"
                 value={formIK.values.meaning}
                 onChange={formIK.handleChange}
+                errorMessege={{ text: formIK.errors.meaning ?? "" }}
               />
               <CustomAutoComplete
-                options={categoryOptions ?? []}
+                label="categories"
+                options={categoryOptions}
                 value={formIK.values.categories}
-                // onChange={(_, newValue) => {
-                //   formIK.setFieldValue(
-                //     field.name,
-                //     newValue.map((v: any) => v.value)
-                //   );
-                // }}
-                // errorMessege={form.errors.category}
-                // getOptionLabel={(option: any) => option.label}
-                // isOptionEqualToValue={(option: any, value: any) =>
-                //   option.value === value
-                // }
-                // onChange={handleCategoryChange}
+                onChange={(_, newValue) => {
+                  const values = isArray(newValue)
+                    ? newValue?.map((item: TAny) =>
+                        typeof item === "string" ? item : item.value
+                      )
+                    : newValue;
+                  formIK.setFieldValue("categories", values);
+                }}
               />
             </Grid>
             <Grid className="btn-wrapper">
@@ -108,7 +109,7 @@ const proverbFormSX: SxProps<Theme> = {
     display: "flex",
     justifyContent: "space-between",
     flexDirection: "column",
-    gap: "26px",
+    gap: "14px",
     mt: "20px",
     mb: "30px",
     "& .text-area": {
