@@ -1,18 +1,18 @@
-import { Grid, Box, type SxProps, type Theme, Typography } from "@mui/material";
 import { memo } from "react";
 import { isArray } from "lodash";
 import { useNavigate } from "react-router-dom";
+import { Grid, Box, type SxProps, type Theme, Typography } from "@mui/material";
 
 import {
   arrayToCustomString,
   slicedTextHandler,
 } from "../../helpers/utils/others";
 import {
+  FONT_TITLE,
+  FONT_BUTTON,
   FONT_WEIGHT_BLOD,
   FONT_HEADING_SMALL,
   FONT_HEADING_MEDIUM,
-  FONT_BODY,
-  FONT_TITLE,
 } from "../../helpers/constants/fonts";
 import {
   SPACE_LG,
@@ -200,7 +200,7 @@ const proverbCardSX = (
       alignItems: "center",
       "& .categories": {
         color: COLOR_TEXT,
-        fontSize: FONT_BODY,
+        fontSize: FONT_BUTTON,
         fontWeight: FONT_WEIGHT_BLOD,
       },
     },
