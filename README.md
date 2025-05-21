@@ -76,7 +76,6 @@ src/
 
 ```bash
 git clone https://github.com/your-username/persian-proverb-app.git
-cd frontend
 npm install
 npm run dev
 ```
