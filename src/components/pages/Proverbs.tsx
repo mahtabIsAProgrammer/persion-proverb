@@ -1,12 +1,13 @@
 import { useState, type FC } from "react";
 import { isArray, isEmpty, map } from "lodash";
-import { Grid, MenuItem, Select } from "@mui/material";
+import { Grid, MenuItem, Select, Typography } from "@mui/material";
 
 import { Navbar } from "../common/Navbar";
 import { ProverbCard } from "../common/ProverbCard";
 import { CustomTextfield } from "../controllers/CustomTextfield";
 import { useGetCategories, useProverbSearch } from "../../services/hooks";
 import { menuItemSX, proverbsSX } from "../../helpers/styleObjects/pages";
+import { nothingFoundICON } from "../others/SvgComponents";
 
 export const Proverbs: FC = () => {
   const [search, setSearch] = useState("");
@@ -54,28 +55,27 @@ export const Proverbs: FC = () => {
         </Grid>
         <Grid className="cards-container">
           <Grid className="cards-wrapper">
-            {!isEmpty(data)
-              ? map(
-                  data,
-                  ({
-                    categories,
-                    englishText,
-                    germanText,
-                    id,
-                    persionText,
-                  }) => (
-                    <ProverbCard
-                      isLoading={isLoading}
-                      categories={categories}
-                      englishText={englishText}
-                      germanText={germanText}
-                      id={id}
-                      persionText={persionText}
-                      key={id}
-                    />
-                  )
+            {!isEmpty(data) ? (
+              map(
+                data,
+                ({ categories, englishText, germanText, id, persionText }) => (
+                  <ProverbCard
+                    isLoading={isLoading}
+                    categories={categories}
+                    englishText={englishText}
+                    germanText={germanText}
+                    id={id}
+                    persionText={persionText}
+                    key={id}
+                  />
                 )
-              : ""}
+              )
+            ) : (
+              <Grid className="no-found">
+                {nothingFoundICON()}
+                <Typography>No Option Found</Typography>
+              </Grid>
+            )}
           </Grid>
         </Grid>
       </Grid>

@@ -132,7 +132,7 @@ export const ProverbCard = memo<IProverbCard>(
         </Grid>
         <Grid className="btn-view-wrapper">
           {isRandomPage ? (
-            <CustomButton text="Another one?" onClick={() => refetch} />
+            <CustomButton text="Another one?" onClick={refetch} />
           ) : !isDetailPage ? (
             <CustomButton
               text="Proveb Detials"

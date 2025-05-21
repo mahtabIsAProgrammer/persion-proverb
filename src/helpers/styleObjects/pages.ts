@@ -90,6 +90,18 @@ export const proverbsSX: SxProps<Theme> = {
         gap: "6px",
         rowGap: "24px",
         justifyContent: "space-between",
+        "& .no-found": {
+          width: "100%",
+          height: "400px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          "& p": {
+            fontSize: "30px",
+            fontWeight: FONT_WEIGHT_BLOD,
+          },
+        },
       },
       "& .view-all": {
         fontSize: "28px",
@@ -106,6 +118,7 @@ export const proverbsSX: SxProps<Theme> = {
     "& .filters": {
       mt: "44px",
       gap: "24px",
+      px: "12px",
       width: "100%",
       display: "flex",
       alignItems: "center",

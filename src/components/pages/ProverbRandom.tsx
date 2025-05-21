@@ -9,7 +9,7 @@ import { proverbDetailsSX } from "../../helpers/styleObjects/pages";
 
 export const ProverbRandom: FC = () => {
   const { id: currentId } = useParams();
-  const { data: getProverbById, isLoading } = useGetProverbRandom();
+  const { data: getProverbById, isLoading, refetch } = useGetProverbRandom();
 
   const { categories, englishText, germanText, meaning, persionText } =
     (getProverbById as { data: Proverbs } | undefined)?.data ?? {};
@@ -28,6 +28,7 @@ export const ProverbRandom: FC = () => {
           englishText={englishText ?? ""}
           germanText={germanText ?? ""}
           meaning={meaning}
+          refetch={() => refetch()}
         />
       </Grid>
     </Grid>

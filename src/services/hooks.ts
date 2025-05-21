@@ -16,7 +16,8 @@ export const useProverbSearch = (filters?: {
   return useQuery({
     queryKey: ["proverbs-search", filters],
     queryFn: () => getProverbs(filters),
-    placeholderData: (prev) => prev,
+    placeholderData: (prev: TAny) => prev,
+    enabled: true,
   });
 };
 
