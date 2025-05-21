@@ -93,19 +93,9 @@ npm run start
 
 ## 🌐 Live Demo
 
-_You can host it on [Vercel](https://vercel.com) or [Netlify](https://netlify.com)._
+\_Comming soon
 
 ---
-
-## 📸 Screenshots
-
-_Add some UI screenshots or a short GIF demo here for visual context._
-
----
-
-## 🤝 Contributing
-
-Open to pull requests or suggestions. Feel free to fork the repo and improve it!
 
 ---
 
