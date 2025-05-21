@@ -1,54 +1,114 @@
-# React + TypeScript + Vite
+# 🧠 Persian Proverb App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack web application to browse, search, manage, and explore **Persian proverbs** with English and German translations and contextual meanings.
 
-Currently, two official plugins are available:
+> "Rome wasn’t built in a day — neither was this app." 💬🔥
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🌟 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🔎 Full-text **search** by language or category
+- 🗃️ Filter proverbs by **categories**
+- ➕ **Add**, ✏️ **edit**, 🗑️ **delete** proverbs dynamically
+- 🎯 Get a **random proverb**
+- 🧠 Meanings and cultural context
+- ✅ Success/error snackbars for all actions
+- 📋 Form validation (Formik + Yup)
+- 💅 Fully responsive UI with Material UI
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 🛠️ Tech Stack
+
+### Frontend:
+
+- **React.js + TypeScript**
+- **Axios** – for API calls
+- **React Query** – for data fetching and cache
+- **Formik + Yup** – form handling & validation
+- **Material UI** – component library
+- **Vite** – for fast dev/build
+
+### Backend:
+
+- **Node.js + Express**
+- **JSON File** – for persistent data storage
+
+---
+
+## 📁 Folder Structure
+
+```
+src/
+│
+├── assets/                # Images and static files
+│
+├── components/
+│   ├── common/            # Reusable UI components (buttons, cards, tooltips)
+│   ├── context/           # Global context (if any)
+│   ├── controllers/       # Logic to handle UI flows
+│   ├── layouts/           # Layout components (wrappers, templates)
+│   ├── others/            # Misc components
+│   └── pages/             # Main pages (Home, Detail, Random, etc.)
+│
+├── constants/             # Static values (e.g., colors, spacing)
+├── helpers/               # Utility functions (e.g., string slicing, formatting)
+├── styleObjects/          # MUI sx styles as objects
+├── types/                 # TypeScript type definitions
+├── utils/                 # Custom hooks and functions
+│
+├── services/
+│   ├── api.ts             # CRUD API functions
+│   ├── apiClient.ts       # Axios instance
+│   └── hooks.ts           # Custom React Query hooks
+│
+├── main.tsx               # App entry point
+├── routes.tsx             # Route configurations
+└── vite.config.ts         # Vite config
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Getting Started
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 🔧 Frontend Setup
+
+```bash
+git clone https://github.com/your-username/persian-proverb-app.git
+cd frontend
+npm install
+npm run dev
 ```
+
+### 🧪 Backend Setup
+
+```bash
+cd backend
+npm install
+npm run start
+```
+
+---
+
+## 🌐 Live Demo
+
+_You can host it on [Vercel](https://vercel.com) or [Netlify](https://netlify.com)._
+
+---
+
+## 📸 Screenshots
+
+_Add some UI screenshots or a short GIF demo here for visual context._
+
+---
+
+## 🤝 Contributing
+
+Open to pull requests or suggestions. Feel free to fork the repo and improve it!
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
