@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Skeleton } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import { Navbar } from "../common/Navbar";
@@ -18,18 +18,26 @@ export const ProverbRandom: FC = () => {
     <Grid sx={proverbDetailsSX}>
       <Navbar />
       <Grid className="content">
-        <ProverbCard
-          isRandomPage
-          isLoading={isLoading}
-          isDetailPage
-          id={currentId ?? ""}
-          categories={categories ?? ""}
-          persionText={persionText ?? ""}
-          englishText={englishText ?? ""}
-          germanText={germanText ?? ""}
-          meaning={meaning}
-          refetch={() => refetch()}
-        />
+        {!isLoading ? (
+          <ProverbCard
+            isRandomPage
+            isDetailPage
+            id={currentId ?? ""}
+            categories={categories ?? ""}
+            persionText={persionText ?? ""}
+            englishText={englishText ?? ""}
+            germanText={germanText ?? ""}
+            meaning={meaning}
+            refetch={() => refetch()}
+          />
+        ) : (
+          <Skeleton
+            width={"768px"}
+            height={"642px"}
+            variant="rounded"
+            sx={{ backgroundColor: "#333333" }}
+          />
+        )}
       </Grid>
     </Grid>
   );

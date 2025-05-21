@@ -1,5 +1,5 @@
 import { isArray } from "lodash";
-import { Grid } from "@mui/material";
+import { Grid, Skeleton } from "@mui/material";
 import { useState, type FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -79,18 +79,26 @@ export const ProverbDetails: FC = () => {
     <Grid sx={proverbDetailsSX}>
       <Navbar />
       <Grid className="content">
-        <ProverbCard
-          isLoading={isLoading}
-          isDetailPage
-          id={currentId ?? ""}
-          categories={categories ?? ""}
-          persionText={persionText ?? ""}
-          englishText={englishText ?? ""}
-          germanText={germanText ?? ""}
-          meaning={meaning}
-          onEdit={() => setOpenEdit(true)}
-          onDelete={() => setOpenDelete(true)}
-        />
+        {!isLoading ? (
+          <ProverbCard
+            isDetailPage
+            id={currentId ?? ""}
+            categories={categories ?? ""}
+            persionText={persionText ?? ""}
+            englishText={englishText ?? ""}
+            germanText={germanText ?? ""}
+            meaning={meaning}
+            onEdit={() => setOpenEdit(true)}
+            onDelete={() => setOpenDelete(true)}
+          />
+        ) : (
+          <Skeleton
+            width={"768px"}
+            height={"642px"}
+            variant="rounded"
+            sx={{ backgroundColor: "#333333" }}
+          />
+        )}
       </Grid>
       <ConfirmDeleteDialog
         open={openDelete}

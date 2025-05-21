@@ -1,6 +1,6 @@
 import { useState, type FC } from "react";
 import { isArray, isEmpty, map } from "lodash";
-import { Grid, MenuItem, Select, Typography } from "@mui/material";
+import { Grid, MenuItem, Select, Skeleton, Typography } from "@mui/material";
 
 import { Navbar } from "../common/Navbar";
 import { ProverbCard } from "../common/ProverbCard";
@@ -25,7 +25,7 @@ export const Proverbs: FC = () => {
       <Grid className="content">
         <Grid className="filters" size={{ xs: 12 }}>
           <CustomTextfield
-            label="Search"
+            placeholder="Search"
             variant="outlined"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -55,25 +55,43 @@ export const Proverbs: FC = () => {
         </Grid>
         <Grid className="cards-container">
           <Grid className="cards-wrapper">
-            {!isEmpty(data) ? (
-              map(
-                data,
-                ({ categories, englishText, germanText, id, persionText }) => (
-                  <ProverbCard
-                    isLoading={isLoading}
-                    categories={categories}
-                    englishText={englishText}
-                    germanText={germanText}
-                    id={id}
-                    persionText={persionText}
-                    key={id}
-                  />
+            {!isLoading ? (
+              !isEmpty(data) ? (
+                map(
+                  data,
+                  ({
+                    categories,
+                    englishText,
+                    germanText,
+                    id,
+                    persionText,
+                  }) => (
+                    <ProverbCard
+                      categories={categories}
+                      englishText={englishText}
+                      germanText={germanText}
+                      id={id}
+                      persionText={persionText}
+                      key={id}
+                    />
+                  )
                 )
+              ) : (
+                <Grid className="no-found">
+                  {nothingFoundICON()}
+                  <Typography>No Option Found</Typography>
+                </Grid>
               )
             ) : (
-              <Grid className="no-found">
-                {nothingFoundICON()}
-                <Typography>No Option Found</Typography>
+              <Grid className="cards-wrapper">
+                {map([1, 2], () => (
+                  <Skeleton
+                    width={"600px"}
+                    height={"502px"}
+                    variant="rounded"
+                    sx={{ backgroundColor: "#333333" }}
+                  />
+                ))}
               </Grid>
             )}
           </Grid>

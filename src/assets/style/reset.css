@@ -4,8 +4,22 @@ body {
   padding: 0;
   /* overflow: hidden; */
   font-family: "Poppins";
-  background-color: #FDFDFD;
+  background-color: #000;
 }
 
+::-webkit-scrollbar {
+  width: 10px;               
+}
+
+::-webkit-scrollbar-track {
+  background: #000;        
+}
+
+::-webkit-scrollbar-thumb {
+  width: 6px;
+  background-color: #5D5D5D;    
+  border-radius: 20px;
+
+}
 
 

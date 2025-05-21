@@ -16,7 +16,6 @@ interface IProverbCard {
   id: string;
   meaning?: string;
   germanText: string;
-  isLoading: boolean;
   persionText: string;
   englishText: string;
   isDetailPage?: boolean;

@@ -132,6 +132,12 @@ export const proverbsSX: SxProps<Theme> = {
           "& fieldset": {
             border: "1px solid" + COLOR_PRIMARY,
           },
+          "& .MuiInputBase-input": {
+            "&::placeholder": {
+              opacity: "1",
+              color: COLOR_TEXT,
+            },
+          },
         },
       },
       "& .filter-input": {
@@ -145,6 +151,9 @@ export const proverbsSX: SxProps<Theme> = {
           color: COLOR_TEXT,
           "& fieldset": {
             border: "1px solid " + COLOR_PRIMARY,
+          },
+          "& svg": {
+            fill: COLOR_TEXT,
           },
         },
       },

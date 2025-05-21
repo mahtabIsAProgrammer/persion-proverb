@@ -1,11 +1,4 @@
-import {
-  Grid,
-  Box,
-  type SxProps,
-  type Theme,
-  Typography,
-  Skeleton,
-} from "@mui/material";
+import { Grid, Box, type SxProps, type Theme, Typography } from "@mui/material";
 import { memo } from "react";
 import { isArray } from "lodash";
 import { useNavigate } from "react-router-dom";
@@ -36,7 +29,6 @@ export const ProverbCard = memo<IProverbCard>(
     persionText,
     isDetailPage,
     meaning,
-    isLoading,
     isRandomPage,
     refetch,
     onEdit,
@@ -44,7 +36,7 @@ export const ProverbCard = memo<IProverbCard>(
   }) => {
     const navigate = useNavigate();
 
-    return !isLoading ? (
+    return (
       <Grid sx={proverbCardSX(isDetailPage)}>
         <Grid className="text-container">
           <Grid className="texts-wrapper">
@@ -146,13 +138,6 @@ export const ProverbCard = memo<IProverbCard>(
           )}
         </Grid>
       </Grid>
-    ) : (
-      <Skeleton
-        width={isDetailPage ? "768px" : "600px"}
-        height={isDetailPage ? "642px" : "502px"}
-        variant="rounded"
-        sx={{ backgroundColor: "#333333" }}
-      />
     );
   }
 );
