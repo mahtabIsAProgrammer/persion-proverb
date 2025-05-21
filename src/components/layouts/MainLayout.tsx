@@ -1,6 +1,6 @@
 import { type FC, useEffect } from "react";
 
-import { Grid, ThemeProvider } from "@mui/material";
+import { Grid, IconButton, ThemeProvider } from "@mui/material";
 import { useLocation, useRoutes } from "react-router-dom";
 
 import {
@@ -17,6 +17,8 @@ import { FONT_FAMILY } from "../../helpers/constants/static";
 import { mainLayoutSX } from "../../helpers/styleObjects/main";
 import { FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
 import { COLOR_PRIMARY, COLOR_TEXT } from "../../helpers/constants/colors";
+import { SnackbarProvider } from "notistack";
+import { errorAlertICON, successAlertICON } from "../others/SvgComponents";
 
 const MainLayout: FC = () => {
   const children = useRoutes(routes);
@@ -42,13 +44,38 @@ const MainLayout: FC = () => {
   return (
     <ThemeProvider theme={themeMUI}>
       <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Grid sx={mainLayoutSX} className="main-layout">
-            {children}
-          </Grid>
-        )}
+        <SnackbarProvider
+          iconVariant={{
+            success: (
+              <IconButton className="alert-icon">
+                {successAlertICON()}
+              </IconButton>
+            ),
+
+            error: (
+              <IconButton className="alert-icon">{errorAlertICON()}</IconButton>
+            ),
+          }}
+          style={{
+            direction: "ltr",
+            backgroundColor: "#000",
+            color: "#fff",
+            fontSize: "14px",
+            fontStyle: "normal",
+            fontWeight: "700",
+            lineHeight: "normal",
+            borderRadius: "12px",
+            boxShadow: "0px 8px 16px 0px rgba(145, 158, 171, 0.16)",
+          }}
+        >
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <Grid sx={mainLayoutSX} className="main-layout">
+              {children}
+            </Grid>
+          )}
+        </SnackbarProvider>
       </MaterialCssVarsProvider>
     </ThemeProvider>
   );

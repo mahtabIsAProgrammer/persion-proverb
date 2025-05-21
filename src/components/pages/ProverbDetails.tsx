@@ -15,10 +15,17 @@ import { ProverbForm } from "../common/ProverbForm";
 import { proverbDetailsSX } from "../../helpers/styleObjects/pages";
 import { ConfirmDeleteDialog } from "../common/ConfirmDeleteDialog";
 import { validationProverb } from "../../helpers/utils/validationHandler";
+import { errorAlert, successAlert } from "../../helpers/utils/messege";
 
 export const ProverbDetails: FC = () => {
-  const { id: currentId } = useParams();
   const navigate = useNavigate();
+
+  const { id: currentId } = useParams();
+
+  const [openEdit, setOpenEdit] = useState<boolean | undefined>();
+
+  const [openDelete, setOpenDelete] = useState(false);
+
   const { data: getProverbById, isLoading } = useGetProverbById(
     currentId ? +currentId : 0
   );
@@ -26,28 +33,41 @@ export const ProverbDetails: FC = () => {
   const { categories, englishText, germanText, meaning, persionText } =
     (getProverbById as { data: Proverbs } | undefined)?.data ?? {};
 
-  const [open, setOpen] = useState<boolean | undefined>();
   const { mutate: updateProverb } = useUpdateProverb(
     currentId ? +currentId : 0
   );
 
+  const { mutate: deleteProverb } = useDeleteProverb();
+
   const handleSubmit = (values: Proverbs) => {
     updateProverb(values, {
       onSuccess: () => {
-        setOpen(false);
+        setOpenEdit(false);
+        successAlert({
+          title: "Successfully Updated!",
+        });
       },
       onError: (error) => {
+        errorAlert({ title: "Problem has occurred on the server side!" });
         console.error("Error creating proverb:", error);
       },
     });
   };
-  const [openDialog, setOpenDialog] = useState(false);
-  const { mutate: deleteProverb } = useDeleteProverb();
 
   const handleDelete = () => {
-    deleteProverb(currentId ? +currentId : 0);
-    navigate("/proverbs");
-    setOpenDialog(false);
+    deleteProverb(currentId ? +currentId : 0, {
+      onSuccess: () => {
+        successAlert({
+          title: "Successfully Deleted!",
+        });
+        setOpenDelete(false);
+        navigate("/proverbs");
+      },
+      onError: (error) => {
+        errorAlert({ title: "Problem has occurred on the server side!" });
+        console.error("Error creating proverb:", error);
+      },
+    });
   };
 
   const { data: getCategories } = useGetCategories();
@@ -68,18 +88,18 @@ export const ProverbDetails: FC = () => {
           englishText={englishText ?? ""}
           germanText={germanText ?? ""}
           meaning={meaning}
-          onEdit={() => setOpen(true)}
-          onDelete={() => setOpenDialog(true)}
+          onEdit={() => setOpenEdit(true)}
+          onDelete={() => setOpenDelete(true)}
         />
       </Grid>
       <ConfirmDeleteDialog
-        open={openDialog}
-        onClose={() => setOpenDialog(false)}
+        open={openDelete}
+        onClose={() => setOpenDelete(false)}
         onConfirm={handleDelete}
       />
       <ProverbForm
-        open={open || false}
-        onClose={() => setOpen(false)}
+        open={openEdit || false}
+        onClose={() => setOpenEdit(false)}
         title={"Edit Proverb"}
         initialValues={{
           persionText: persionText || "",

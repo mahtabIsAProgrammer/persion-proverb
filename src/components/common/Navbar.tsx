@@ -11,13 +11,14 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, type FC } from "react";
 
 import { ProverbForm } from "./ProverbForm";
 import { MAX_WIDTH } from "../../helpers/constants/static";
 import { CustomButton } from "../controllers/CustomButton";
 import { closeIcon, menuIcon } from "../others/SvgComponents";
 import { SPACE_MD, SPACE_SM } from "../../helpers/constants/spaces";
+import { errorAlert, successAlert } from "../../helpers/utils/messege";
 import { validationProverb } from "../../helpers/utils/validationHandler";
 import { useCreateProverb, useGetCategories } from "../../services/hooks";
 import { FONT_BODY, FONT_WEIGHT_REGULAR } from "../../helpers/constants/fonts";
@@ -25,12 +26,16 @@ import { COLOR_PRIMARY, COLOR_SECEONDRY } from "../../helpers/constants/colors";
 
 import logo from "../../assets/images/logo.webp";
 
-export const Navbar = () => {
-  const navigate = useNavigate();
+export const Navbar: FC = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [open, setOpen] = useState<boolean | undefined>();
+
+  const navigate = useNavigate();
+
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const [openAdd, setOpenAdd] = useState<boolean | undefined>();
+
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { data: getCategories } = useGetCategories();
 
@@ -40,8 +45,15 @@ export const Navbar = () => {
   const { mutate: createProverb } = useCreateProverb();
   const handleSubmit = (values: Proverbs) => {
     createProverb(values, {
-      onSuccess: () => setOpen(false),
-      onError: (error) => console.error("Error creating proverb:", error),
+      onSuccess: () => {
+        successAlert({
+          title: "Successfully Added!",
+        });
+        setOpenAdd(false);
+      },
+      onError: () => {
+        errorAlert({ title: "Problem has occurred on the server side!" });
+      },
     });
   };
 
@@ -80,7 +92,7 @@ export const Navbar = () => {
           <CustomButton
             variant="contained"
             text="Add Proverb"
-            onClick={() => setOpen(true)}
+            onClick={() => setOpenAdd(true)}
           />
         </Grid>
       )}
@@ -115,7 +127,7 @@ export const Navbar = () => {
           <ListItem
             component="button"
             onClick={() => {
-              setOpen(true);
+              setOpenAdd(true);
               setDrawerOpen(false);
             }}
           >
@@ -125,8 +137,8 @@ export const Navbar = () => {
       </Drawer>
       {/* Form Dialog */}
       <ProverbForm
-        open={open || false}
-        onClose={() => setOpen(false)}
+        open={openAdd || false}
+        onClose={() => setOpenAdd(false)}
         title={"Add Proverb"}
         initialValues={{
           persionText: "",
