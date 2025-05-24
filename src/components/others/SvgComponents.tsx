@@ -65,8 +65,8 @@ export const arrowFilledIcon = (color?: string) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M12.9993 23.8334C18.9824 23.8334 23.8327 18.9831 23.8327 13C23.8327 7.01694 18.9824 2.16669 12.9993 2.16669C7.01626 2.16669 2.16602 7.01694 2.16602 13C2.16602 18.9831 7.01626 23.8334 12.9993 23.8334ZM13.5082 9.1755C13.8255 8.8582 14.3399 8.8582 14.6572 9.1755L17.9072 12.4255C18.2245 12.7428 18.2245 13.2572 17.9072 13.5745L14.6572 16.8245C14.3399 17.1418 13.8255 17.1418 13.5082 16.8245C13.1909 16.5072 13.1909 15.9928 13.5082 15.6755L15.3711 13.8125H8.66602C8.21728 13.8125 7.85352 13.4488 7.85352 13C7.85352 12.5513 8.21728 12.1875 8.66602 12.1875H15.3711L13.5082 10.3245C13.1909 10.0072 13.1909 9.4928 13.5082 9.1755Z"
       fill={color || "white"}
     />
@@ -81,19 +81,19 @@ export const closeIcon = (color?: string) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+    <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
     <g
       id="SVGRepo_tracerCarrier"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
 
     <g id="SVGRepo_iconCarrier">
       {" "}
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z"
         fill={color || "#FFFFFF"}
       />{" "}
@@ -109,18 +109,18 @@ export const errorIcon = (color?: string) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+    <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
     <g
       id="SVGRepo_tracerCarrier"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
 
     <g id="SVGRepo_iconCarrier">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm-1.5-5.009c0-.867.659-1.491 1.491-1.491.85 0 1.509.624 1.509 1.491 0 .867-.659 1.509-1.509 1.509-.832 0-1.491-.642-1.491-1.509zM11.172 6a.5.5 0 0 0-.499.522l.306 7a.5.5 0 0 0 .5.478h1.043a.5.5 0 0 0 .5-.478l.305-7a.5.5 0 0 0-.5-.522h-1.655z"
         fill={color || "#e31616"}
       />
@@ -136,12 +136,12 @@ export const menuIcon = (color?: string) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+    <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
     <g
       id="SVGRepo_tracerCarrier"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
 
     <g id="SVGRepo_iconCarrier">
@@ -149,9 +149,9 @@ export const menuIcon = (color?: string) => (
       <path
         d="M4 6H20M4 12H20M4 18H20"
         stroke={color || "#FFFFFF"}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />{" "}
     </g>
   </svg>

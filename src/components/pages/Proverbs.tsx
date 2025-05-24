@@ -84,8 +84,9 @@ export const Proverbs: FC = () => {
               )
             ) : (
               <Grid className="cards-wrapper">
-                {map([1, 2], () => (
+                {map([1, 2], (key) => (
                   <Skeleton
+                    key={key}
                     width={"600px"}
                     height={"502px"}
                     variant="rounded"

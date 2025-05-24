@@ -31,6 +31,7 @@ export const Home: FC = () => {
                     persionText,
                   }) => (
                     <ProverbCard
+                      key={id}
                       categories={categories}
                       englishText={englishText}
                       germanText={germanText}
@@ -44,8 +45,9 @@ export const Home: FC = () => {
               )
             ) : (
               <Grid className="cards-wrapper">
-                {map([1, 2], () => (
+                {map([1, 2], (key) => (
                   <Skeleton
+                    key={key}
                     sx={{
                       width: WIDTH_CARD.width,
                       height: WIDTH_CARD.height,
